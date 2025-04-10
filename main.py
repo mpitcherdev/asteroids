@@ -40,7 +40,13 @@ def main():
 			if asteroid.collision(player_obj):  # If collision is detected
 				print("Game over!")
 				sys.exit()  # Exit the program\
-
+		
+			# Check collisions between asteroids and bullets
+			for shot in shots:  # Loop over all shots in the shots group
+				if asteroid.collision(shot):  # If an asteroid collides with a shot
+					asteroid.split()  # Remove asteroid
+					shot.kill()      # Remove shot
+		
 		screen.fill("black")
 		for obj in drawable:
 			obj.draw(screen)
